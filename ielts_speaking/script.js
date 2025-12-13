@@ -3838,7 +3838,3 @@ function renderTips() {
 
 // Initial Render
 router('home');
-
-// Expose functions to window for inline event handlers
-window.router = router;
-window.switchLanguage = switchLanguage;
