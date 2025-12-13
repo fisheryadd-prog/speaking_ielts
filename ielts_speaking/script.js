@@ -1486,7 +1486,7 @@ I'd love to make this trip again for several reasons. Firstly, the natural beaut
    （重游会创造新的回忆。）`,
                     tips: [
                         'Start with basic trip information 从基本旅行信息开始',
-                        'Describe specific activities and experiences 描述具体活动和体验', 
+                        'Describe specific activities and experiences 描述具体活动和体验',
                         'Explain emotional impact and feelings 解释情感影响和感受',
                         'Give multiple reasons for wanting to revisit 给出多个想重游的理由',
                         'Use vivid descriptive language 使用生动的描述性语言',
@@ -2668,7 +2668,7 @@ function updateNav() {
             btn.classList.add('text-slate-600');
         }
     });
-    
+
     // Update user action buttons based on authentication status
     updateUserActions();
 }
@@ -2677,7 +2677,7 @@ function updateNav() {
 function updateUserActions() {
     const userActions = document.getElementById('user-actions');
     if (!userActions) return;
-    
+
     if (isAuthenticated && currentUser) {
         // Show profile and logout buttons for authenticated users
         userActions.innerHTML = `
@@ -2727,7 +2727,7 @@ function renderAdmin() {
         router('home');
         return;
     }
-    
+
     // Calculate dashboard stats
     const totalUsers = mockUsers.length;
     const activeSubscriptions = mockUsers.filter(user => {
@@ -2735,7 +2735,7 @@ function renderAdmin() {
         const today = new Date();
         return expiryDate > today;
     }).length;
-    
+
     mainContent.innerHTML = `
         <div class="container mx-auto max-w-7xl">
             <div class="text-center mb-12">
@@ -2784,11 +2784,11 @@ function renderAdmin() {
                         </thead>
                         <tbody class="bg-white divide-y divide-slate-200">
                             ${mockUsers.map(user => {
-                                const expiryDate = new Date(user.expiry);
-                                const today = new Date();
-                                const isActive = expiryDate > today;
-                                
-                                return `
+        const expiryDate = new Date(user.expiry);
+        const today = new Date();
+        const isActive = expiryDate > today;
+
+        return `
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="text-sm font-medium text-slate-900">${user.name}</div>
@@ -2822,7 +2822,7 @@ function renderAdmin() {
                                         </td>
                                     </tr>
                                 `;
-                            }).join('')}
+    }).join('')}
                         </tbody>
                     </table>
                 </div>
@@ -2854,10 +2854,10 @@ function deleteUser(userId) {
 
 function exportUsers() {
     // Mock export function - in real app, this would generate a CSV or Excel file
-    const csvContent = "data:text/csv;charset=utf-8," 
-        + "Name,Email,Role,Subscription,Expiry Date\n" 
+    const csvContent = "data:text/csv;charset=utf-8,"
+        + "Name,Email,Role,Subscription,Expiry Date\n"
         + mockUsers.map(user => `${user.name},${user.email},${user.role},${user.subscription},${user.expiry}`).join("\n");
-    
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -2974,7 +2974,7 @@ function renderProfile() {
         router('login');
         return;
     }
-    
+
     mainContent.innerHTML = `
         <div class="container mx-auto max-w-2xl">
             <div class="glass-card rounded-3xl p-8 shadow-xl">
@@ -3105,10 +3105,10 @@ function renderPayment() {
 function login() {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-    
+
     // Mock login logic - in real app, this would be an API call
     const user = mockUsers.find(u => u.email === email && u.password === password);
-    
+
     if (user) {
         currentUser = user;
         isAuthenticated = true;
@@ -3123,18 +3123,18 @@ function register() {
     const email = document.getElementById('register-email').value;
     const password = document.getElementById('register-password').value;
     const confirmPassword = document.getElementById('register-confirm').value;
-    
+
     if (password !== confirmPassword) {
         alert('Passwords do not match');
         return;
     }
-    
+
     // Check if email already exists
     if (mockUsers.some(u => u.email === email)) {
         alert('Email already registered');
         return;
     }
-    
+
     // Mock registration logic - in real app, this would be an API call
     const newUser = {
         id: mockUsers.length + 1,
@@ -3144,7 +3144,7 @@ function register() {
         subscription: 'basic',
         expiry: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
     };
-    
+
     mockUsers.push(newUser);
     currentUser = newUser;
     isAuthenticated = true;
@@ -3163,14 +3163,14 @@ function processPayment(planKey) {
         router('login');
         return;
     }
-    
+
     // Mock payment processing - in real app, this would integrate with a payment gateway
     alert(`${t('payment.success')}\n${t('payment.successDesc')}`);
-    
+
     // Update user subscription
     currentUser.subscription = planKey;
     currentUser.expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-    
+
     router('profile');
 }
 
@@ -3838,3 +3838,7 @@ function renderTips() {
 
 // Initial Render
 router('home');
+
+// Expose functions to window for inline event handlers
+window.router = router;
+window.switchLanguage = switchLanguage;
