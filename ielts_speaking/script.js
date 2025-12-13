@@ -3836,5 +3836,14 @@ function renderTips() {
     `;
 }
 
+// Expose functions to global scope for inline HTML handlers
+window.router = router;
+window.switchLanguage = switchLanguage;
+
 // Initial Render
-router('home');
+// Ensure DOM is fully loaded before rendering
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => router('home'));
+} else {
+    router('home');
+}
