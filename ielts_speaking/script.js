@@ -3836,14 +3836,9 @@ function renderTips() {
     `;
 }
 
-// Expose functions to global scope for inline HTML handlers
+// Make functions available globally for inline event handlers
 window.router = router;
 window.switchLanguage = switchLanguage;
 
 // Initial Render
-// Ensure DOM is fully loaded before rendering
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => router('home'));
-} else {
-    router('home');
-}
+router('home');
