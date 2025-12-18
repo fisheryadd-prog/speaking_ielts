@@ -3829,6 +3829,14 @@ function renderTips() {
 // Make functions available globally for inline event handlers
 window.router = router;
 window.switchLanguage = switchLanguage;
+window.switchPracticeTab = switchPracticeTab;
+window.switchTopicPart = switchTopicPart;
+window.showPracticeDetail = showPracticeDetail;
+window.toggleAnswer = toggleAnswer;
+window.login = login;
+window.register = register;
+window.logout = logout;
+window.processPayment = processPayment;
 
 // Initial Render
 router('home');
