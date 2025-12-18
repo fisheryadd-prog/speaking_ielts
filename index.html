@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Speaking Tutor - 雅思口语教学平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        },
+                        accent: {
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(20, 184, 166, 0.08), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .active-nav {
+            background-color: white;
+            color: #6d28d9;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Improved Typography for Reading */
+        .prose {
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .prose p {
+            margin-bottom: 1.25em;
+        }
+
+        .prose h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+        }
+
+        /* Better contrast for text */
+        .text-slate-700 {
+            color: rgb(51 65 85);
+        }
+
+        .text-slate-800 {
+            color: rgb(30 41 59);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #1e293b;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" onclick="router('home')" class="flex items-center gap-3 group cursor-pointer">
+                    <div
+                        class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl shadow-lg group-hover:scale-105 transition-transform">
+                        <span class="text-white font-bold text-xl">I</span>
+                        <div
+                            class="absolute -bottom-1 -right-1 w-3 h-3 bg-accent-500 rounded-full border-2 border-white">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-bold text-slate-900 leading-none text-lg">IELTS Tutor</div>
+                        <div class="text-xs text-slate-500 font-medium tracking-wide">SPEAKING PREP</div>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-4">
+                    <div
+                        class="flex items-center gap-2 bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl border border-white/40">
+                        <button onclick="router('home')"
+                            class="nav-link px-5 py-2 rounded-xl font-medium text-sm transition-all text-slate-600 hover:text-primary-600"
+                            data-page="home" data-en="Home" data-zh="首页">
+                            Home
+                        </button>
+                        <button onclick="router('topics')"
+                            class="nav-link px-5 py-2 rounded-xl font-medium text-sm transition-all text-slate-600 hover:text-primary-600"
+                            data-page="topics" data-en="Topics" data-zh="题库">
+                            Topics
+                        </button>
+                        <button onclick="router('practice')"
+                            class="nav-link px-5 py-2 rounded-xl font-medium text-sm transition-all text-slate-600 hover:text-primary-600"
+                            data-page="practice" data-en="Practice" data-zh="练习">
+                            Practice
+                        </button>
+                        <button onclick="router('tips')"
+                            class="nav-link px-5 py-2 rounded-xl font-medium text-sm transition-all text-slate-600 hover:text-primary-600"
+                            data-page="tips" data-en="Tips" data-zh="技巧">
+                            Tips
+                        </button>
+                    </div>
+
+                    <!-- User Actions -->
+                    <div class="flex items-center gap-3">
+                        <!-- Login/Register/Profile -->
+                        <div id="user-actions" class="flex items-center gap-2">
+                            <button onclick="router('login')"
+                                class="px-5 py-2 rounded-xl font-medium text-sm transition-all bg-primary-600 text-white hover:bg-primary-700 shadow-sm">
+                                Login
+                            </button>
+                            <button onclick="router('register')"
+                                class="px-5 py-2 rounded-xl font-medium text-sm transition-all bg-white text-primary-700 hover:bg-primary-50 shadow-sm">
+                                Register
+                            </button>
+                        </div>
+
+                        <!-- Language Switch -->
+                        <div
+                            class="flex items-center gap-1 bg-white/50 backdrop-blur-sm p-1.5 rounded-2xl border border-white/40">
+                            <button onclick="switchLanguage('en')" id="lang-en"
+                                class="px-4 py-2 rounded-xl font-medium text-xs transition-all text-slate-600 hover:bg-white/80">
+                                EN
+                            </button>
+                            <button onclick="switchLanguage('zh')" id="lang-zh"
+                                class="px-4 py-2 rounded-xl font-medium text-xs transition-all bg-white text-primary-700 shadow-sm">
+                                中文
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6" id="main-content">
+        <!-- Content injected by JS -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-12 mt-auto">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold">I
+                </div>
+                <span class="text-xl font-bold text-white">IELTS Speaking Tutor</span>
+            </div>
+            <p class="text-slate-500 mb-6">Designed for Band 8.0+ Aspirants</p>
+            <div class="text-sm text-slate-600">
+                &copy; 2025 IELTS Tutor. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="script.js" defer></script>
+</body>
+
+</html>
