@@ -2627,17 +2627,7 @@ function router(page) {
     window.scrollTo(0, 0);
 }
 
-function updateNav() {
-    document.querySelectorAll('.nav-link').forEach(btn => {
-        if (btn.dataset.page === currentPage) {
-            btn.classList.add('active-nav', 'text-primary-700');
-            btn.classList.remove('text-slate-600');
-        } else {
-            btn.classList.remove('active-nav', 'text-primary-700');
-            btn.classList.add('text-slate-600');
-        }
-    });
-}
+
 
 // Render Functions
 function render() {
